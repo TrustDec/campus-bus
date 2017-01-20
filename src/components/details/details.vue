@@ -52,15 +52,40 @@ export default {
 	methods: {
 		position(p) {
 			return (p * 50) + 'px'
+		},
+		test(){
+			this.$parent.frmdet = this;
+		let test = '/api/vacation';
+		if (this.$parent.selectedline) {
+//console.log("**************************************");
+		
+		let id = this.$parent.selectedline.id;
+		let url = "http://api.biaoxintong.com:8080/landing-craft/busSiteApiController.do?busbypass&lineid="+id;
+		this.$http.get(url).then(response => {		
+			let data = JSON.parse(response.data);
+			this.details = data.details;
+			//console.log(this.details.mcpasssite);
+			this.dataItem=data.details.mcpasssite.length;
+			//console.log(data.details.mcpasssite);
+			//this.dataStart = true;
+		/*this.$http.get('/api/details').then(response => {
+			response = response.body;
+			if (response.errno === ERR_OK) {
+				this.details = response.data;
+				this.dataItem=response.data.length;
+			}*/
+		});
+	}
 		}
 	},
 	ready() {
+		this.$parent.frmdet = this;
 		let test = '/api/vacation';
 		if (this.$parent.selectedline) {
-console.log("**************************************");
+//console.log("**************************************");
 		
 		let id = this.$parent.selectedline.id;
-		let url = "http://huiyong.f3322.net:43808/landing-craft/busSiteApiController.do?busbypass&lineid="+id;
+		let url = "http://api.biaoxintong.com:8080/landing-craft/busSiteApiController.do?busbypass&lineid="+id;
 		this.$http.get(url).then(response => {		
 			let data = JSON.parse(response.data);
 			this.details = data.details;

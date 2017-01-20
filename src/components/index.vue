@@ -24,6 +24,9 @@ export default {
   props: {
     selectedline: {
       type: Object
+    },
+    frmdet: {
+      type: Object
     }
   },
   data() {
@@ -37,6 +40,10 @@ export default {
       this.data = this.selectedline;
       this.showIndex = true;
       this.$refs.frmroute.seller=this.selectedline;
+      if (this.frmdet!=null)
+      {
+this.frmdet.test();
+      }
       this.$router.go({path: '/details', query: {r: parseInt(Math.random()*10)}});
       console.log(this.$refs.frmroute);
       //console.log(this.$refs.frmroute);
@@ -56,7 +63,7 @@ export default {
         //this.$router.go({path: '/app'});
         //location.reload();
         this.showIndex = false;
-        setTimeout(()=>{location.reload()},400);
+        //setTimeout(()=>{location.reload()},400);
         /*this.$destory;
         this.$router.go('/app');*/
       },

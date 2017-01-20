@@ -51,7 +51,7 @@ export default {
     },
     created() {
       let test = '/api/index';
-      let url = 'http://huiyong.f3322.net:43808/landing-craft/busLineApiController.do?allline';
+      let url = 'http://api.biaoxintong.com:8080/landing-craft/busLineApiController.do?allline';
       this.$http.get(url).then(response => {
         let data = JSON.parse(response.data);
         this.index = data;

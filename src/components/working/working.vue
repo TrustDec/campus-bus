@@ -51,7 +51,7 @@ export default {
 		//console.log(this.$refs.frmmain);
 		let test = '/api/working';
 		let id = this.$parent.selectedline.id;
-		let url = "http://huiyong.f3322.net:43808/landing-craft/busOrderApiController.do?working&lineid="+id;
+		let url = "http://api.biaoxintong.com:8080/landing-craft/busOrderApiController.do?working&lineid="+id;
 		this.$http.get(url).then(response => {
 			//response = response.body;
 			let data = JSON.parse(response.data);

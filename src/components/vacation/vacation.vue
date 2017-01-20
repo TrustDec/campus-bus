@@ -40,7 +40,7 @@ export default {
 	created() {
 		let test = '/api/vacation';
 		let id = this.$parent.selectedline.id;
-		let url = "http://huiyong.f3322.net:43808/landing-craft/busOrderApiController.do?vacation&lineid="+id;
+		let url = "http://api.biaoxintong.com:8080/landing-craft/busOrderApiController.do?vacation&lineid="+id;
 		this.$http.get(url).then(response => {		
 			let data = JSON.parse(response.data);
 			this.vacation = data;
