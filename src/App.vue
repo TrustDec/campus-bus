@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="advertisement">
-      <img src="http://img.mukewang.com/587f42480001f49812000460.jpg" class="advertisement-image">
+      <img src="http://bpic.588ku.com/element_origin_min_pic/16/06/25/16576e3f26e3948.jpg" class="advertisement-image">
     </div>
     <ul>
-      <li v-for="item in index" class="index-channel-site-item" @click="selectIndex(item, $event)">
+      <li v-for="item in index.index" class="index-channel-site-item" @click="selectIndex(item, $event)">
         <span class="site-item-text">{{item.name}}</span>
         <i class="icon-keyboard_arrow_right"></i>
       </li>
@@ -28,29 +28,38 @@ export default {
         index: [],
         dataItem: 0,
         dataStart: true,
-        selectedIndex: {}
+        selectedIndex: {},
+        data: {}
       }
     },
     methods: {
       selectIndex(index, event) {
-        if (!event._constructed) {
+        // console.log(event);
+        /*if (!event._constructed) {
           return;
-        }
+        }*/
         console.log(index);
         this.selectedIndex = index;
-        this.$refs.index.show();
+        //console.log(this.selectedIndex);
+        this.$refs.index.show(index);
+
       }
     },
     components: {
       index
     },
     created() {
-      this.$http.get('/api/index').then(response => {
-        response = response.body;
-        if (response.errno === ERR_OK) {
-          this.index = response.data;
-          this.dataItem=response.data.length;
-        }
+      let test = '/api/index';
+      let url = 'http://huiyong.f3322.net:43808/landing-craft/busLineApiController.do?allline';
+      this.$http.get(url).then(response => {
+        let data = JSON.parse(response.data);
+        this.index = data;
+        this.dataItem = data.index.length;
+        this.data = data;
+        //if (response.errno === ERR_OK) {
+          /*this.index = response.data;
+          this.dataItem=response.data.length;*/
+        //}
       });
     }
 };
@@ -59,7 +68,7 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus">
 @import "./common/stylus/mixin.styl"
 .advertisement-image
-  height: 120
+  height: 120px
   width: 100%
 .index-channel-site-item
   width: 100%
@@ -77,4 +86,5 @@ export default {
     right: 10px
     font-size: 18px
     line-height: 43px
+    color: #999
 </style>

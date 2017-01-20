@@ -1,18 +1,18 @@
 <template>
 	<div class="weekend">
 		<ul v-if="dataStart">
-			<li v-for="item in weekend" class="weekend-item" >
-				<div class="weekend-item-start">
-					<div class="weekend-start"></div>
+			<li v-for="item in weekend" class="nav-item" >
+				<div class="nav-item-start">
+					<div class="nav-start"></div>
 				</div>
-				<div class="weekend-item-details">
-					<div class="weekend-text weekend-item-text">
-						<span class="weekend-text weekend-text-start">{{item.firstTrain}}</span>
-						<span class="weekend-text">{{item.firstTrainTime}}</span>
+				<div class="nav-item-details">
+					<div class="nav-text nav-item-text">
+						<span class="nav-text nav-text-start">{{item.firstTrain}}</span>
+						<span class="nav-text nav-text-start">{{item.firstTrainTime}}</span>
 					</div>
-					<div class="weekend-text-details-box">
-						<span class="weekend-text weekend-text-plate">车牌:{{item.licensePlate}}</span>
-						<span class="weekend-text">司机:{{item.driver}}</span>
+					<div class="nav-text-details-box">
+						<span class="nav-text nav-text-plate">车牌:{{item.licensePlate}}</span>
+						<span class="nav-text nav-text-plate">司机:{{item.driver}}</span>
 					</div>
 				</div>
 			</li>
@@ -67,7 +67,8 @@ export default {
 	position: absolute
 	width: 100%
 	top: 115px
-	bottom: 0px
+	height: 100%
+	background-color: #fff
 	.weekend-item
 		width: 100%
 		height: 80px
