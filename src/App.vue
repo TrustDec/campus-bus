@@ -10,12 +10,12 @@
       </li>
     </ul>
   </div>
-  <index :index="selectedIndex" v-ref:index></index>
+  <Frmindex  v-ref:frmmain></Frmindex>
 </template>
 
 <script type="text/ecmascript-6">
 import BScroll from 'better-scroll';
-import index from './components/index';
+import Frmindex from './components/index';
 const ERR_OK = 0;
 export default {
     props: {
@@ -28,25 +28,26 @@ export default {
         index: [],
         dataItem: 0,
         dataStart: true,
-        selectedIndex: {},
+        selectedIndex1: {},
         data: {}
       }
     },
     methods: {
-      selectIndex(index, event) {
+      selectIndex(index1, event) {
         // console.log(event);
         /*if (!event._constructed) {
           return;
         }*/
-        console.log(index);
-        this.selectedIndex = index;
+        this.$refs.frmmain.selectedline=index1;
+        //this.index = index1;
         //console.log(this.selectedIndex);
-        this.$refs.index.show(index);
+        this.$refs.frmmain.show();
+        
 
       }
     },
     components: {
-      index
+      Frmindex
     },
     created() {
       let test = '/api/index';

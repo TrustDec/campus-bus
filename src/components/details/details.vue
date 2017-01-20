@@ -16,13 +16,13 @@
 			<div class="details-time-axis">
 				<ul class="details-time-axis-rod" :style="{height: dataItem*40 + 'px'}">
 					<li :style="{top: position(item)}" class="details-time-axis-rod-spot" 
-					v-for="(item, index) in details" num={{item+1}}></li>
+					v-for="(item, index) in details.mcpasssite" num={{item+1}}></li>
 				</ul>
 			</div>
 			<div class="details-channel-site">
 				<ul>
-					<li v-for="item in details" class="details-channel-site-item" >
-						<span class="site-item-text">{{item.name}}</span>
+					<li v-for="item in details.mcpasssite" class="details-channel-site-item" >
+						<span class="site-item-text">{{item.passsite}}</span>
 					</li>
 				</ul>
 			</div>			
@@ -54,15 +54,28 @@ export default {
 			return (p * 50) + 'px'
 		}
 	},
-	created() {
-		console.log(this.seller.id);
-		this.$http.get('/api/details').then(response => {
+	ready() {
+		let test = '/api/vacation';
+		if (this.$parent.selectedline) {
+console.log("**************************************");
+		
+		let id = this.$parent.selectedline.id;
+		let url = "http://huiyong.f3322.net:43808/landing-craft/busSiteApiController.do?busbypass&lineid="+id;
+		this.$http.get(url).then(response => {		
+			let data = JSON.parse(response.data);
+			this.details = data.details;
+			//console.log(this.details.mcpasssite);
+			this.dataItem=data.details.mcpasssite.length;
+			//console.log(data.details.mcpasssite);
+			//this.dataStart = true;
+		/*this.$http.get('/api/details').then(response => {
 			response = response.body;
 			if (response.errno === ERR_OK) {
 				this.details = response.data;
 				this.dataItem=response.data.length;
-			}
+			}*/
 		});
+	}
 	}
 
 }

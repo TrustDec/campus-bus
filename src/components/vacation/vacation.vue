@@ -1,18 +1,18 @@
 <template>
 	<div class="vacation">
 		<ul v-if="dataStart">
-			<li v-for="item in vacation" class="nav-item" >
+			<li v-for="item in vacation.vacation" class="nav-item" >
 				<div class="nav-item-start">
 					<div class="nav-start"></div>
 				</div>
 				<div class="nav-item-details">
 					<div class="nav-text nav-item-text">
-						<span class="nav-text nav-text-start">{{item.firstTrain}}</span>
-						<span class="nav-text">{{item.firstTrainTime}}</span>
+						<span class="nav-text nav-text-start">{{item.mcorder}}</span>
+						<span class="nav-text nav-text-start">{{item.mcstarttime}}</span>
 					</div>
 					<div class="nav-text-details-box">
-						<span class="nav-text nav-text-plate">车牌:{{item.licensePlate}}</span>
-						<span class="nav-text">司机:{{item.driver}}</span>
+						<span class="nav-text nav-text-plate">车牌:{{item.mcnum}}</span>
+						<span class="nav-text nav-text-plate">司机:{{item.mclinkman}}</span>
 					</div>
 				</div>
 			</li>
@@ -38,7 +38,14 @@ export default {
 		}
 	},
 	created() {
-		this.$http.get('/api/vacation').then(response => {
+		let test = '/api/vacation';
+		let id = this.$parent.selectedline.id;
+		let url = "http://huiyong.f3322.net:43808/landing-craft/busOrderApiController.do?vacation&lineid="+id;
+		this.$http.get(url).then(response => {		
+			let data = JSON.parse(response.data);
+			this.vacation = data;
+			this.dataStart = true;
+		/*this.$http.get('/api/vacation').then(response => {
 			response = response.body;
 			if (response.errno === ERR_OK) {
 				let data = response.data[0];
@@ -55,7 +62,7 @@ export default {
 						break;
 					}
 				}			
-			}
+			}*/
 		});
 	}
 

@@ -1,18 +1,18 @@
 <template>
 	<div class="weekend">
 		<ul v-if="dataStart">
-			<li v-for="item in weekend" class="nav-item" >
+			<li v-for="item in weekend.working" class="nav-item" >
 				<div class="nav-item-start">
 					<div class="nav-start"></div>
 				</div>
 				<div class="nav-item-details">
 					<div class="nav-text nav-item-text">
-						<span class="nav-text nav-text-start">{{item.firstTrain}}</span>
-						<span class="nav-text nav-text-start">{{item.firstTrainTime}}</span>
+						<span class="nav-text nav-text-start">{{item.mcorder}}</span>
+						<span class="nav-text nav-text-start">{{item.mcstarttime}}</span>
 					</div>
 					<div class="nav-text-details-box">
-						<span class="nav-text nav-text-plate">车牌:{{item.licensePlate}}</span>
-						<span class="nav-text nav-text-plate">司机:{{item.driver}}</span>
+						<span class="nav-text nav-text-plate">车牌:{{item.mcnum}}</span>
+						<span class="nav-text nav-text-plate">司机:{{item.mclinkman}}</span>
 					</div>
 				</div>
 			</li>
@@ -38,9 +38,14 @@ export default {
 		}
 	},
 	created() {
-		this.$http.get('/api/weekend').then(response => {
-			response = response.body;
-			if (response.errno === ERR_OK) {
+		let test = '/api/weekend';
+		let id = this.$parent.selectedline.id;
+		let url = "http://huiyong.f3322.net:43808/landing-craft/busOrderApiController.do?weekend&lineid="+id;
+		this.$http.get(url).then(response => {		
+			let data = JSON.parse(response.data);
+			this.weekend = data;
+			this.dataStart = true;
+			/*if (response.errno === ERR_OK) {
 				let data = response.data[0];
 				for (let item in data) {
 					if (data[item]) {
@@ -55,7 +60,7 @@ export default {
 						break;
 					}
 				}			
-			}
+			}*/
 		});
 	}
 

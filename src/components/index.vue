@@ -1,28 +1,28 @@
 <template>
   <div v-show="showIndex" class="index-box" v-el:index transition="move">
-    <div class="title"><i class="icon-arrow_lift" @click="hide"></i>{{index.name}}</div>
+    <div class="title"><i class="icon-arrow_lift" @click="hide"></i>{{data.name}}</div>
     <div class="tab border-1px">
        <div class="tab-item">
-        <a v-link="{path:'/details'}">站点详情</a>
+        <a v-link="{path:'/details',params: {id: 5}}">站点详情</a>
        </div>
        <div class="tab-item">
-        <a v-link="{path:'/working'}">工作日</a>
+        <a v-link="{path:'/working',params: {id: 5}}">工作日</a>
        </div>
        <div class="tab-item">
-        <a v-link="{path:'/weekend'}">节假/周末</a>
+        <a v-link="{path:'/weekend',params: {id: data.id}}">节假/周末</a>
        </div>
        <div class="tab-item">
-        <a v-link="{path:'/vacation'}">寒暑假</a>
+        <a v-link="{path:'/vacation',params: {id: data.id}}">寒暑假</a>
        </div>
     </div>
-    <router-view class="router-view" :seller="data"></router-view>
+    <router-view  v-ref:frmroute></router-view>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 export default {
   props: {
-    index: {
+    selectedline: {
       type: Object
     }
   },
@@ -33,11 +33,13 @@ export default {
     }
   },
   methods: {
-    show(index) {
-      //console.log(index);
-      //console.log(this.index);
-      this.data = index;
-        this.showIndex = true;
+    show() {
+      this.data = this.selectedline;
+      this.showIndex = true;
+      this.$refs.frmroute.seller=this.selectedline;
+      this.$router.go({path: '/details', query: {r: parseInt(Math.random()*10)}});
+      console.log(this.$refs.frmroute);
+      //console.log(this.$refs.frmroute);
         //this.selectType = ALL;
         //this.onlyContent = true;
         /*this.$nextTick(() => {
@@ -51,7 +53,12 @@ export default {
         });*/
       },
       hide() {
+        //this.$router.go({path: '/app'});
+        //location.reload();
         this.showIndex = false;
+        setTimeout(()=>{location.reload()},400);
+        /*this.$destory;
+        this.$router.go('/app');*/
       },
   }
 };
@@ -103,6 +110,4 @@ export default {
           color: #51A6FF
           font-weight: 700
           border-bottom: 2px #51A6FF solid
-    .router-view
-      background-color: red
 </style>

@@ -18,6 +18,9 @@ let router = new VueRouter({
 	linkActiveClass: 'active'
 });
 router.map({
+	'/app': {
+		component: App
+	},
 	'/details': {
 		component: details
 	},
@@ -34,4 +37,4 @@ router.map({
 
 router.start(app, '#app');
 
-router.go('/details');
+router.go('/app');
