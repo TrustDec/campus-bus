@@ -1,0 +1,69 @@
+{
+	"index":[
+		{
+			"name":"北校园-高新区"
+		},
+		{
+			"name":"北校园1-高新区1"
+		},
+		{
+			"name":"北校园2-高新区2"
+		},
+		{
+			"name":"北校园3-高新区3"
+		}
+	],
+	"details": [
+		{		
+			"name":"南区",
+			"site":[1,2,3,4,5]
+		},
+		{		
+			"name":"北苑路",
+			"site":[1,2,3,4,5]
+		},
+		{		
+			"name":"西校区",
+			"site":[1,2,3,4,5]
+		},
+		{		
+			"name":"大食堂",
+			"site":[1,2,3,4,5]
+		}
+	],
+	"working": [
+		{
+			"firstTrain": "首班车",
+			"firstTrainTime": "7:00",
+			"licensePlate": "陕A2345",
+			"driver": "小李"
+		},
+		{
+			"firstTrain": "第二班",
+			"firstTrainTime": "7:00",
+			"licensePlate": "陕A2345",
+			"driver": "小李"
+		},
+		{
+			"firstTrain": "第三班",
+			"firstTrainTime": "7:00",
+			"licensePlate": "陕A2345",
+			"driver": "小李"
+		},
+		{
+			"firstTrain": "末班车",
+			"firstTrainTime": "7:00",
+			"licensePlate": "陕A2345",
+			"driver": "小李"
+		}
+	],
+	"weekend":[
+		{
+			"firstTrain": "首班车",
+			"firstTrainTime": "7:00",
+			"licensePlate": "陕A2345",
+			"driver": "小张"
+		}
+	],
+	"vacation":[{}]
+}
