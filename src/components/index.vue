@@ -1,25 +1,22 @@
 <template>
-  <div v-show="showIndex" class="index-box" v-el:index transition="move">
-    <div class="title"><i class="icon-arrow_lift" @click="hide"></i>{{data.name}}</div>
-    <div class="tab border-1px">
-       <div class="tab-item">
-        <a v-link="{path:'/details',params: {id: 5}}">站点详情</a>
-       </div>
-       <div class="tab-item">
-        <a v-link="{path:'/working',params: {id: 5}}">工作日</a>
-       </div>
-       <div class="tab-item">
-        <a v-link="{path:'/weekend',params: {id: data.id}}">节假/周末</a>
-       </div>
-       <div class="tab-item">
-        <a v-link="{path:'/vacation',params: {id: data.id}}">寒暑假</a>
-       </div>
+  <div  class="index-box" v-el:index transition="move">
+   <div class="title">{{data.name}}</div>
+    <ul class="tab border-1px">
+      <li class="tab-item" :class="{active:active==$index}" v-for="item in tab" @click="tabToggle($index,item.name)">
+        <span>{{item.type}}</span>
+      </li>
+    </ul>
+    <div class="view">
+      <component :is='currentView' keep-alive></component>
     </div>
-    <router-view  v-ref:frmroute></router-view>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import details from './details/details';
+  import working from './working/working';
+  import weekend from './weekend/weekend';
+  import vacation from './vacation/vacation';
 export default {
   props: {
     selectedline: {
@@ -32,47 +29,43 @@ export default {
   data() {
     return {
       data: {},
-      showIndex: false
+      active: 0,
+      showIndex: true,
+      tab: [
+        {name:'details',type:'站点详情'},
+        {name:'working',type:'工作日'},
+        {name:'weekend',type:'节假/周末'},
+        {name:'vacation',type:'寒暑假'}
+      ],
+      currentView: 'details'
     }
   },
+  components: {
+    details,
+    working,
+    weekend,
+    vacation
+  },
+  ready() {
+    this.data=this.$route.params;
+  },
   methods: {
-    show() {
-      this.data = this.selectedline;
-      this.showIndex = true;
-      this.$refs.frmroute.seller=this.selectedline;
-      if (this.frmdet!=null)
-      {
-this.frmdet.test();
-      }
-      this.$router.go({path: '/details', query: {r: parseInt(Math.random()*10)}});
-      console.log(this.$refs.frmroute);
-      //console.log(this.$refs.frmroute);
-        //this.selectType = ALL;
-        //this.onlyContent = true;
-        /*this.$nextTick(() => {
-          if (!this.scroll) {
-            this.scroll = new BScroll(this.$els.index, {
-              click: true
-            });
-          } else {
-            this.scroll.refresh();
-          }
-        });*/
-      },
-      hide() {
-        //this.$router.go({path: '/app'});
-        //location.reload();
-        this.showIndex = false;
-        //setTimeout(()=>{location.reload()},400);
-        /*this.$destory;
-        this.$router.go('/app');*/
-      },
+    tabToggle(index,tabText){
+      console.log(index);
+      console.log(tabText);
+      this.active = index;
+        this.currentView = tabText
+     }
   }
 };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../common/stylus/mixin.styl'
+&.active
+  color: #51A6FF
+  font-weight: 700
+  border-bottom: 2px #51A6FF solid
 .index-box
   position: fixed
   left: 0
@@ -113,8 +106,8 @@ this.frmdet.test();
         display: block
         font-size: 15px
         color: rgb(77, 85, 93)
-        &.active
-          color: #51A6FF
-          font-weight: 700
-          border-bottom: 2px #51A6FF solid
+  .view
+    flex: 1
+    height: 100%
+    background-color: #f6f6f6
 </style>

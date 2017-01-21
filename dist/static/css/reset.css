@@ -31,6 +31,9 @@ time, mark, audio, video, input {
     color: #999;     
     text-align: center;
 }
+body{
+    background: #F6F6F6
+}
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, menu, nav, section {
