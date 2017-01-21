@@ -39,30 +39,12 @@ export default {
 	},
 	created() {
 		let test = '/api/vacation';
-		let id = this.$parent.selectedline.id;
+		let id = this.$route.params.id;
 		let url = "http://api.biaoxintong.com:8080/landing-craft/busOrderApiController.do?vacation&lineid="+id;
 		this.$http.get(url).then(response => {		
 			let data = JSON.parse(response.data);
 			this.vacation = data;
 			this.dataStart = true;
-		/*this.$http.get('/api/vacation').then(response => {
-			response = response.body;
-			if (response.errno === ERR_OK) {
-				let data = response.data[0];
-				for (let item in data) {
-					if (data[item]) {
-						this.vacation = response.data;
-						this.dataStart = true;
-						console.log("1");
-						break;
-					}else{
-						this.vacation = response.data;
-						this.dataStart = false;
-						console.log("2");
-						break;
-					}
-				}			
-			}*/
 		});
 	}
 

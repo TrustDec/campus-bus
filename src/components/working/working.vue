@@ -42,40 +42,14 @@ export default {
 			
 		}
 	},
-	/*ready() {
-		//console.log(this.$route.params.id);
-		//console.log(this.$parent.selectedline);
-	},*/
 	created() {
-		//console.log(this.$parent.selectedline);
-		//console.log(this.$refs.frmmain);
 		let test = '/api/working';
-		let id = this.$parent.selectedline.id;
+		let id = this.$route.params.id;
 		let url = "http://api.biaoxintong.com:8080/landing-craft/busOrderApiController.do?working&lineid="+id;
 		this.$http.get(url).then(response => {
-			//response = response.body;
 			let data = JSON.parse(response.data);
 			this.working = data;
 			this.dataStart = true;
-			//console.log(data.working);
-			//let data = JSON.parse(response.working);
-			/*console.log(data);
-			this.working = data;
-			this.dataStart = true;*/
-			/*if (response.errno === ERR_OK) {
-				let data = response.data[0];
-				for (let item in data) {
-					if (data[item]) {
-						this.working = response.data;
-						this.dataStart = true;
-						break;
-					}else{
-						this.working = response.data;
-						this.dataStart = false;
-						break;
-					}
-				}
-			}*/
 		});
 	}
 
