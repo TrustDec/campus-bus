@@ -48,7 +48,11 @@ export default {
 		let url = "http://api.biaoxintong.com:8080/landing-craft/busOrderApiController.do?working&lineid="+id;
 		this.$http.get(url).then(response => {
 			let data = JSON.parse(response.data);
-			this.working = data;
+			if (data.working[0].id =='0') {
+				this.dataStart = false;
+				return;
+			}
+			this.working = data;	
 			this.dataStart = true;
 		});
 	}
@@ -60,7 +64,7 @@ export default {
 .working	
 	position: absolute
 	width: 100%
-	top: 115px
-	background-color: #fff
+	//top: 115px
+	//background-color: #fff
 				
 </style>

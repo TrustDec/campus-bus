@@ -1,16 +1,20 @@
 <template>
   <div>
-    <div class="advertisement">
-      <img src="http://ww1.sinaimg.cn/large/593be353jw1e24b6qf5k8j.jpg" class="advertisement-image">
+    <div v-if="dataStart">
+      <div class="advertisement">
+        <img src="http://ww1.sinaimg.cn/large/593be353jw1e24b6qf5k8j.jpg" class="advertisement-image">
+      </div>
+      <div v-for="item in index.index" class="index-channel-site-item">
+        <a v-link="{name:'index',params:{id:item.id,name:item.name,beizhu:item.beizhu}}" class="site-item-text">{{item.name}} <i class="icon-keyboard_arrow_right"></i></a>
+      </div>      
     </div>
-    <div v-for="item in index.index" class="index-channel-site-item">
-      <a v-link="{name:'index',params:{id:item.id,name:item.name}}" class="site-item-text">{{item.name}} <i class="icon-keyboard_arrow_right"></i></a>
+    <div v-else class="data-null">
+      暂无班车路线信息
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-/*http://bpic.588ku.com/element_origin_min_pic/16/06/25/16576e3f26e3948.jpg*/
 import BScroll from 'better-scroll';
 import Frmindex from '../components/index';
 const ERR_OK = 0;
@@ -35,8 +39,13 @@ export default {
       let url = 'http://api.biaoxintong.com:8080/landing-craft/busLineApiController.do?allline';
       this.$http.get(url).then(response => {
         let data = JSON.parse(response.data);
+        if (data.index[0].name == '0') {
+          this.dataStart = false;
+          return;
+        }
         this.index = data;
         this.dataItem = data.index.length;
+        this.dataStart = true;
       });
     }
 };
@@ -56,13 +65,12 @@ export default {
   background-color: #fff
   border-1px(rgba(7, 17, 27, 0.1))
   .site-item-text
-    width: 100%
     height: 100%
-    display: inline-block
+    display: block
     font-weight: 500
     color: #000
+    margin-left: 15px
     font-size: 15px
-    padding-left: 18px
     line-height: 43px
   .icon-keyboard_arrow_right
     position: absolute

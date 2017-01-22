@@ -34,7 +34,7 @@ export default {
 	data() {
 		return {
 			vacation: [],
-			dataStart: false
+			dataStart: true
 		}
 	},
 	created() {
@@ -43,7 +43,11 @@ export default {
 		let url = "http://api.biaoxintong.com:8080/landing-craft/busOrderApiController.do?vacation&lineid="+id;
 		this.$http.get(url).then(response => {		
 			let data = JSON.parse(response.data);
-			this.vacation = data;
+			if (data.vacation[0].id =='0') {
+				this.dataStart = false;
+				return;
+			}
+			this.vacation = data;	
 			this.dataStart = true;
 		});
 	}
@@ -55,6 +59,6 @@ export default {
 .vacation	
 	position: absolute
 	width: 100%
-	top: 115px
-	background-color: #fff
+	//top: 115px
+	//background-color: #fff
 </style>
