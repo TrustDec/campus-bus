@@ -18,7 +18,7 @@ router.map({
 	'*': {
 		component: test,
 	},
-	'/index/:id/:name': {
+	'/index/:id/:name/:beizhu': {
 		name: 'index',
 		component: index
 	}

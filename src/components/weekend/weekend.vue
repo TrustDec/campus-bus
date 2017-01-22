@@ -24,7 +24,6 @@
 </template>
 <script type="text/ecmascript-6">
 import BScroll from 'better-scroll';
-const ERR_OK = 0;
 export default {
 	props: {
 		seller: {
@@ -34,16 +33,20 @@ export default {
 	data() {
 		return {
 			weekend: [],
-			dataStart: false
+			dataStart: true
 		}
 	},
 	created() {
 		let test = '/api/weekend';
 		let id = this.$route.params.id;
 		let url = "http://api.biaoxintong.com:8080/landing-craft/busOrderApiController.do?weekend&lineid="+id;
-		this.$http.get(url).then(response => {		
+		this.$http.get(url).then(response => {
 			let data = JSON.parse(response.data);
-			this.weekend = data;
+			if (data.working[0].id =='0') {
+				this.dataStart = false;
+				return;
+			}
+			this.weekend = data;	
 			this.dataStart = true;
 		});
 	}
@@ -55,7 +58,7 @@ export default {
 .weekend	
 	position: absolute
 	width: 100%
-	top: 115px
+	//top: 115px
 	height: 100%
 	//background-color: #fff
 	.nav-item-bg
