@@ -10,7 +10,7 @@
       </div>      
     </div>
     <div v-else class="data-null">
-      暂无班车路线信息
+      暂无路线信息
     </div>
   </div>
 </template>

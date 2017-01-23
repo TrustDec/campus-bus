@@ -40,7 +40,7 @@ export default {
         {name:'weekend',type:'工作日'},
         {name:'working',type:'节假/周末'},
         {name:'vacation',type:'寒暑假'},
-        {name:'details',type:'乘车点'}
+        {name:'details',type:'途径站点'}
       ],
       currentView: 'vacation'
     }
