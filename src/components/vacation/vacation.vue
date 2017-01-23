@@ -11,8 +11,8 @@
 						<span class="nav-text nav-text-start">{{item.mcstarttime}}</span>
 					</div>
 					<div class="nav-text-details-box">
-						<span class="nav-text nav-text-plate">车牌:{{item.mcnum}}</span>
-						<span class="nav-text nav-text-plate">司机:{{item.mclinkman}}</span>
+						<span class="nav-text nav-text-plate">车牌：{{item.mcnum}}</span>
+						<span class="nav-text nav-text-plate">司机：{{item.mclinkman}}</span>
 					</div>
 				</div>
 			</li>
