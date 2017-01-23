@@ -6,7 +6,7 @@
       </div>
       <div class="title">{{data.name}}</div>
       <ul class="tab border-1px">
-        <li class="tab-item" :class="{active:active==$index}" v-for="item in tab" @click="tabToggle($index,item.name)">
+        <li class="tab-item" :class="{active: active == $index}" v-for="item in tab" @click="tabToggle($index,item.name)">
         <span>{{item.type}}</span>
         </li>
       </ul>
@@ -40,7 +40,7 @@ export default {
         {name:'weekend',type:'工作日'},
         {name:'working',type:'节假/周末'},
         {name:'vacation',type:'寒暑假'},
-        {name:'details',type:'乘车点'}
+        {name:'details',type:'途径站点'}
       ],
       currentView: 'vacation'
     }
@@ -63,8 +63,10 @@ export default {
   },
   methods: {
     tabToggle(index,tabText){
+      console.log(index);
+      console.log(this.active);
       this.active = index;
-        this.currentView = tabText
+      this.currentView = tabText
      },
      hideBeizhu(){
       this.showBeizhu = false;
@@ -117,8 +119,8 @@ export default {
   .title
     text-align: center
     font-size: 18px
-    font-weight: 600
-    margin: 25px 0 30px
+    font-weight: bold
+    margin: 25px 0 20px
     .icon-arrow_lift
       position: absolute
       z-index: 20
@@ -137,6 +139,7 @@ export default {
     .tab-item
       flex: 1
       text-align: center
+      background-color: #f8f8f8
       & > a
         display: block
         font-size: 15px
