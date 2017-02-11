@@ -30,6 +30,8 @@ time, mark, audio, video, input {
     font-size: 24px;
     color: #999;     
     text-align: center;
+    width: 100%;
+    transition: initial;
 }
 body{
     background: #F6F6F6
