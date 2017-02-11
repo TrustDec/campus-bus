@@ -1,6 +1,6 @@
 <template>
   <div  class="index-box" v-el:index transition="move">
-      <div class="index-Notice" v-show="showBeizhu">
+      <div class="index-Notice" v-show="showBeizhu" class="box">
         <span class="index-Notice-text">{{data.beizhu}}</span>
         <i class="icon-close" @click="hideBeizhu"></i>
       </div>
@@ -10,9 +10,7 @@
         <span>{{item.type}}</span>
         </li>
       </ul>
-      <div class="view">
-        <component :is='currentView' keep-alive></component>
-      </div>
+      <component :is='currentView' keep-alive transition="move1" class='weew'></component>
   </div>
 </template>
 
@@ -52,7 +50,6 @@ export default {
     vacation
   },
   ready() {
-    console.log(this.$route.params.beizhu);
     if (this.$route.params.beizhu == 'null') {
       this.data=this.$route.params;
       this.showBeizhu = false;
@@ -63,12 +60,13 @@ export default {
   },
   methods: {
     tabToggle(index,tabText){
-      console.log(index);
-      console.log(this.active);
       this.active = index;
       this.currentView = tabText
      },
      hideBeizhu(){
+      for (var i = 0; i < this.$children.length; i++) {
+         this.$children[i].showBeizhu=false;
+      }
       this.showBeizhu = false;
      }
   }
@@ -90,10 +88,13 @@ export default {
   width: 100%
   background-color: #fff
   &.move-transition
-    transition: all 0.1s ease
-    opacity: 1
+    // transition: all 0.1s ease
+    transition: all 0.2s ease
+    // opacity: 1
+    transform: translate3d(0, 0, 0)
   &.move-enter, &.move-leave
-    opacity: 0
+    // opacity: 0
+    transform: translate3d(100%, 0, 0)
   .index-Notice
     padding-left: 15px
     padding-right: 15px
@@ -144,8 +145,11 @@ export default {
         display: block
         font-size: 15px
         color: rgb(77, 85, 93)
-  .view
-    flex: 1
-    height: 100%
-    background-color: #f6f6f6
+  .weew
+    &.move1-transition
+      transition: all 0.2s ease
+      transform: translate3d(0, 0, 0)
+    &.move1-enter, &.move1-leave
+      transition: all 0.2s ease
+      transform: translate3d(0, 50%, 0)
 </style>
